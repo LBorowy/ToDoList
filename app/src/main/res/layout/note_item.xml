@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:layout_weight="1">
+
+
+    <TextView
+        android:id="@+id/noteItem_noteName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="Note"
+        android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/noteItem_noteDown"
+        android:padding="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/noteItem_noteName"
+        android:layout_toRightOf="@+id/noteItem_noteName"
+        app:srcCompat="@drawable/ic_arrow_downward_black_24dp" />
+
+    <ImageView
+        android:id="@+id/noteItem_noteUp"
+        android:padding="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/noteItem_noteDown"
+        android:layout_toRightOf="@+id/noteItem_noteDown"
+        app:srcCompat="@drawable/ic_arrow_upward_black_24dp" />
+
+    <ImageView
+        android:padding="8dp"
+        android:id="@+id/noteItem_noteDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/noteItem_noteUp"
+        android:layout_toRightOf="@+id/noteItem_noteUp"
+        app:srcCompat="@drawable/ic_close_black_24dp" />
+
+
+</RelativeLayout>

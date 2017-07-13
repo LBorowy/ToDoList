@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="pl.lborowy.todolist.MainActivity">
+
+    <EditText
+        android:id="@+id/main_noteEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/medium_padding"
+        android:hint="Create note..." />
+
+    <Button
+        android:id="@+id/main_addButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="add to list"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/main_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
