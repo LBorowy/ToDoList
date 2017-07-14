@@ -75,7 +75,12 @@ public class MainActivity extends AppCompatActivity implements NotesRecyclerAdap
 
     @Override
     public void onUpClicked(int position) {
-
+        if (position > 0) {
+            Note note = new Note();
+            noteList.remove(position);
+            noteList.add(position - 1, note);
+            adapter.notifyItemMoved(position, position - 1);
+        }
     }
 
     @Override
