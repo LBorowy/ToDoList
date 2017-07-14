@@ -30,6 +30,7 @@ public class NoteViewHolder extends RecyclerView.ViewHolder{ // extends z dokume
     @BindView(R.id.noteItem_noteEdit)
     public ImageView noteEdit;
 
+
     public NoteViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);

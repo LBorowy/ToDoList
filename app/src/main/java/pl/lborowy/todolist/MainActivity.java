@@ -10,6 +10,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.lborowy.todolist.adapters.NotesRecyclerAdapter;
 import pl.lborowy.todolist.dialogs.EditNoteDialog;
+import pl.lborowy.todolist.eventBusMessages.SaveNoteMessage;
 import pl.lborowy.todolist.model.Note;
 
 public class MainActivity extends AppCompatActivity implements NotesRecyclerAdapter.OnNoteClicked {
@@ -38,6 +43,18 @@ public class MainActivity extends AppCompatActivity implements NotesRecyclerAdap
         ButterKnife.bind(this);
         prepareNoteData();
         prepareRecyclerAdapter();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this); // żeby garbagecollector mógł później to wyczyścić
     }
 
     private void prepareNoteData() {
@@ -102,5 +119,15 @@ public class MainActivity extends AppCompatActivity implements NotesRecyclerAdap
         Note note = noteList.get(position);
         EditNoteDialog editNoteDialog = new EditNoteDialog().newInstance(note, position);
         editNoteDialog.show(getSupportFragmentManager(), null);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void saveNoteFromDialog(SaveNoteMessage message) {
+        int position = message.getPosition();
+        Note note = message.getNote();
+        // // TODO: 2017-07-14 updatelist and notifyAdapter
+        noteList.remove(position);
+        noteList.add(position, note);
+        adapter.notifyItemChanged(position);
     }
 }

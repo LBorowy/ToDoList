@@ -32,4 +32,6 @@ dependencies {
     //butterknife
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+
+    compile 'org.greenrobot:eventbus:3.0.0'
 }

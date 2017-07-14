@@ -9,9 +9,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import pl.lborowy.todolist.R;
+import pl.lborowy.todolist.eventBusMessages.SaveNoteMessage;
 import pl.lborowy.todolist.model.Note;
 
 /**
@@ -60,5 +64,27 @@ public class EditNoteDialog extends DialogFragment {
             note = arguments.getParcelable(NOTE_KEY);
             noteIndex = arguments.getInt(NOTE_INDEX_KEY);
         }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        updateView();
+    }
+
+    private void updateView() {
+        if (note != null) {
+            nameText.setText(note.getName());
+        }
+        else {
+            dismiss();
+        }
+    }
+
+    @OnClick(R.id.editNote_saveButton)
+    public void onSaveButtonClicked() {
+        note.setName(nameText.getText().toString().trim());
+        EventBus.getDefault().post(new SaveNoteMessage(note, noteIndex));
+        dismiss();
     }
 }
