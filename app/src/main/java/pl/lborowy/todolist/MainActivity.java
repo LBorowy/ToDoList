@@ -19,7 +19,7 @@ import butterknife.OnClick;
 import pl.lborowy.todolist.adapters.NotesRecyclerAdapter;
 import pl.lborowy.todolist.model.Note;
 
-public class MainActivity extends AppCompatActivity implements NotesRecyclerAdapter.OnNoteClicked{
+public class MainActivity extends AppCompatActivity implements NotesRecyclerAdapter.OnNoteClicked {
     @BindView(R.id.main_noteEditText)
     EditText noteEditText;
     @BindView(R.id.main_addButton)
@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements NotesRecyclerAdap
     List<Note> noteList;
     private NotesRecyclerAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,16 +38,19 @@ public class MainActivity extends AppCompatActivity implements NotesRecyclerAdap
         prepareNoteData();
         prepareRecyclerAdapter();
     }
+
     private void prepareNoteData() {
         noteList = new ArrayList<>();
         noteList.add(new Note("test1"));
     }
+
     private void prepareRecyclerAdapter() {
-        adapter = new NotesRecyclerAdapter(noteList, this, this );
+        adapter = new NotesRecyclerAdapter(noteList, this, this);
         recyclerView.setAdapter(adapter);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
+
     @OnClick(R.id.main_addButton)
     public void addNote() {
         Note note = new Note();
@@ -57,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements NotesRecyclerAdap
         adapter.notifyDataSetChanged();
         noteEditText.setText("");
     }
-//    @Override
+
+    //    @Override
 //    public void onDeleteClicked(Note note) {
 //        int indexOfNote = noteList.indexOf(note);
 //        onDeleteClicked(indexOfNote);
@@ -67,10 +72,19 @@ public class MainActivity extends AppCompatActivity implements NotesRecyclerAdap
         noteList.remove(position);
         adapter.notifyItemRemoved(position);
     }
+
     @Override
     public void onUpClicked(int position) {
+
     }
+
     @Override
     public void onDownClicked(int position) {
+        if (position < noteList.size() - 1) {
+            Note note = new Note();
+            noteList.remove(position);
+            noteList.add(position + 1, note);
+            adapter.notifyItemMoved(position, position + 1);
+        }
     }
 }

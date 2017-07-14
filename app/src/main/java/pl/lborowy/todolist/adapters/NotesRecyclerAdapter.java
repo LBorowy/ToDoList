@@ -44,6 +44,22 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NoteViewHolder> {
                 }
             }
         });
+        holder.noteUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onNoteClicked != null) {
+                    onNoteClicked.onUpClicked(holder.getAdapterPosition());
+                }
+            }
+        });
+        holder.noteDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onNoteClicked != null) {
+                    onNoteClicked.onDownClicked(holder.getAdapterPosition());
+                }
+            }
+        });
     }
     @Override
     public int getItemCount() {
