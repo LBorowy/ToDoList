@@ -17,49 +17,42 @@ import pl.lborowy.todolist.viewHolders.NoteViewHolder;
  */
 
 public class NotesRecyclerAdapter extends RecyclerView.Adapter<NoteViewHolder> {
-
     private List<Note> noteList;
     private LayoutInflater inflater;
     private OnNoteClicked onNoteClicked;
-
-    public NotesRecyclerAdapter(List<Note> noteList, Context context, OnNoteClicked onNoteClicked) { // przepisywanie naszej listy
+    public NotesRecyclerAdapter(List<Note> noteList, Context context, OnNoteClicked onNoteClicked) {
         this.noteList = noteList;
         this.onNoteClicked = onNoteClicked;
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); // ważne
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-
     @Override
     public NoteViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_item, parent, false);
+        View view = inflater.inflate(R.layout.note_item, parent, false);
         NoteViewHolder viewHolder = new NoteViewHolder(view);
         return viewHolder;
-        // parent -> recyclerview
     }
-
     @Override
     public void onBindViewHolder(NoteViewHolder holder, final int position) {
-        Note note = noteList.get(position);
+        final Note note = noteList.get(position);
         holder.nameTextView.setText(note.getName());
         holder.noteDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onNoteClicked != null) {
-                    onNoteClicked.onDeleteClicked(position);
+                    onNoteClicked.onDeleteClicked(note);
+//                    onNoteClicked.onDeleteClicked(position);
                 }
             }
         });
     }
-
     @Override
     public int getItemCount() {
-        return noteList.size(); // gdyby była tablica to .length()
+        return noteList.size();
     }
-
     public interface OnNoteClicked {
+        void onDeleteClicked(Note note);
         void onDeleteClicked(int position);
-
         void onUpClicked(int position);
-
-        void onDownClicke(int position);
+        void onDownClicked(int position);
     }
 }
