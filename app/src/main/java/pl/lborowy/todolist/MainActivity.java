@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements NotesRecyclerAdap
             noteList.remove(position);
             noteList.add(position - 1, note);
             adapter.notifyItemMoved(position, position - 1);
+            linearLayoutManager.scrollToPosition(position - 1);
         }
     }
 
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements NotesRecyclerAdap
             noteList.remove(position);
             noteList.add(position + 1, note);
             adapter.notifyItemMoved(position, position + 1);
+            linearLayoutManager.scrollToPosition(position + 1);
         }
     }
 }
