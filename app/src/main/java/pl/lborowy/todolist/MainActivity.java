@@ -57,11 +57,11 @@ public class MainActivity extends AppCompatActivity implements NotesRecyclerAdap
         adapter.notifyDataSetChanged();
         noteEditText.setText("");
     }
-    @Override
-    public void onDeleteClicked(Note note) {
-        int indexOfNote = noteList.indexOf(note);
-        onDeleteClicked(indexOfNote);
-    }
+//    @Override
+//    public void onDeleteClicked(Note note) {
+//        int indexOfNote = noteList.indexOf(note);
+//        onDeleteClicked(indexOfNote);
+//    }
     @Override
     public void onDeleteClicked(int position) {
         noteList.remove(position);
