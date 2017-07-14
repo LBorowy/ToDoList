@@ -60,6 +60,15 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NoteViewHolder> {
                 }
             }
         });
+        holder.noteEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onNoteClicked != null) {
+                    onNoteClicked.onEditClicked(holder.getAdapterPosition());
+                }
+            }
+        });
+
     }
     @Override
     public int getItemCount() {
@@ -69,5 +78,6 @@ public class NotesRecyclerAdapter extends RecyclerView.Adapter<NoteViewHolder> {
         void onDeleteClicked(int position);
         void onUpClicked(int position);
         void onDownClicked(int position);
+        void onEditClicked(int position);
     }
 }

@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pl.lborowy.todolist.adapters.NotesRecyclerAdapter;
+import pl.lborowy.todolist.dialogs.EditNoteDialog;
 import pl.lborowy.todolist.model.Note;
 
 public class MainActivity extends AppCompatActivity implements NotesRecyclerAdapter.OnNoteClicked {
@@ -93,5 +94,13 @@ public class MainActivity extends AppCompatActivity implements NotesRecyclerAdap
             adapter.notifyItemMoved(position, position + 1);
             linearLayoutManager.scrollToPosition(position + 1);
         }
+    }
+
+    @Override
+    public void onEditClicked(int position) {
+        // // TODO: 2017-07-14 editnote
+        Note note = noteList.get(position);
+        EditNoteDialog editNoteDialog = new EditNoteDialog().newInstance(note, position);
+        editNoteDialog.show(getSupportFragmentManager(), null);
     }
 }
